@@ -3,15 +3,33 @@ import { useEffect } from "react";
 
 
 
-export const useDarkMode = () => {
-    const [value, setValue] = useLocalStorage(key); 
+export const useDarkMode = (initialValue) => {
+    const [darkMode, setDarkMode] = useLocalStorage(initialValue);    
     useEffect(() => {
-        const localValue = window.localStorage.getItem('darkMode')
-        if (value) {
-        setValue(localValue)
+        if (darkMode === true) {
+            document.body.classList.add("dark-mode")
         } else {
-        setValue(value); 
+            document.body.classList.remove("dark-mode")
         }
-    }, [])
-    return [value, localValue]; 
+    }, [darkMode]);
+    return [darkMode, setDarkMode]; 
 }; 
+
+
+
+
+// styling set styling if on or off. 
+// const toggleMode = e => {
+//     e.preventDefault();
+//     setDarkMode(!darkMode);
+//   };
+
+// .dark-mode {
+//     color: #fff;
+//     background-color: #313843;
+//     .navbar {
+//       background-color: #1F2022;
+//       border: none;
+//     }
+//   }
+
